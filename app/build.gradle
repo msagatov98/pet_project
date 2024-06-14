@@ -1,0 +1,80 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.compose.compiler)
+}
+
+android {
+    namespace = "com.example.myapplication"
+    compileSdk = libs.versions.compileSdk.get().toInteger()
+
+    defaultConfig {
+        applicationId = "com.example.myapplication"
+        minSdk = libs.versions.minSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInteger()
+        versionCode = libs.versions.versionCode.get().toInteger()
+        versionName = libs.versions.versionName.get()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+        targetCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.valueOf(libs.versions.java.get()).toString()
+    }
+
+    buildFeatures {
+        compose = true
+    }
+}
+
+dependencies {
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.coil.compose)
+    implementation(libs.koin.androidx.compose)
+
+    implementation(libs.androidx.startup.runtime)
+    implementation(libs.androidx.profileinstaller)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.paging.compose)
+
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.kotlinx.coroutines.android)
+
+    implementation(libs.moshi.kotlin)
+    implementation libs.moshi
+    implementation(libs.okhttp)
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    debugImplementation(libs.chucker.library)
+    releaseImplementation(libs.chucker.library.no.op)
+
+    baselineProfile(project(":app:baselineprofile"))
+}

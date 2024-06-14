@@ -1,0 +1,40 @@
+plugins {
+    alias(libs.plugins.android.test)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.baselineprofile)
+}
+
+android {
+    namespace = "com.example.baselineprofile"
+    compileSdk = libs.versions.compileSdk.get().toInteger()
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+        targetCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.valueOf(libs.versions.java.get()).toString()
+    }
+
+    defaultConfig {
+        minSdk = libs.versions.minSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInteger()
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    targetProjectPath = ":app"
+
+}
+
+baselineProfile {
+    useConnectedDevices = true
+}
+
+dependencies {
+    implementation(libs.androidx.junit)
+    implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.uiautomator)
+    implementation(libs.androidx.benchmark.macro.junit4)
+}
