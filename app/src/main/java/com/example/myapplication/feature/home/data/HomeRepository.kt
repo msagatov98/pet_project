@@ -1,5 +1,6 @@
 package com.example.myapplication.feature.home.data
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -8,9 +9,11 @@ import com.example.myapplication.common.network.apiCall
 import com.example.myapplication.common.network.map
 import com.squareup.moshi.Json
 import kotlinx.coroutines.flow.Flow
+import java.util.UUID
 
 class HomeRepository(
-    private val homeApi: HomeApi
+    private val homeApi: HomeApi,
+    private val pokemonDatabase: PokemonDatabase,
 ) {
 
     suspend fun getData(page: Int): Resource<Data> {
@@ -40,10 +43,15 @@ class HomeRepository(
             }
     }
 
-    fun getPokemonPagingSource(): Flow<PagingData<Data.Result>> {
+    @OptIn(ExperimentalPagingApi::class)
+    fun getPokemonPagingSource(): Flow<PagingData<Pokemon>> {
         return Pager(
             config = PagingConfig(pageSize = 20),
-            pagingSourceFactory = { PokemonPagingSource(this) },
+            pagingSourceFactory = { pokemonDatabase.getPokemonDao().getPokemon() },
+            remoteMediator = PokemonRemoteMediator(
+                homeRepository = this,
+                pokemonDatabase = pokemonDatabase,
+            )
         ).flow
     }
 }

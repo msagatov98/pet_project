@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_bar_home">Басты бет</string>
+    <string name="bottom_bar_search">Іздеу</string>
+    <string name="bottom_bar_profile">Профиль</string>
+
+    <!-- Profile -->
+    <string name="profile_language">Тіл</string>
+    <string name="profile_app_theme">App theme</string>
+    <string name="profile_color_scheme">Tүс схемасы</string>
+</resources>

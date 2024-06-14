@@ -1,21 +1,20 @@
 package com.example.myapplication.feature.profile
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.myapplication.common.ui.UiRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
+import com.example.myapplication.common.ui.data.UiRepository
+import com.example.myapplication.common.ui.presentation.controller.DefaultScreenController
+import com.example.myapplication.common.ui.presentation.controller.ScreenController
 
 class ProfileViewModel(
     private val uiRepository: UiRepository,
-) : ViewModel() {
+) : ViewModel(),
+    ScreenController<ProfileAction, ProfileUiState, Nothing> by DefaultScreenController(
+        ProfileUiState()
+    ) {
 
-    val state = MutableStateFlow(ProfileUiState())
-
-    fun onAction(action: ProfileAction) {
+    override fun action(action: ProfileAction) {
         when (action) {
+            is ProfileAction.OnLanguageSelected -> uiRepository.setLanguage(action.language)
             is ProfileAction.OnAppThemeSelected -> uiRepository.setAppTheme(action.theme.name)
             is ProfileAction.OnColorSchemeSelected -> uiRepository.setColorScheme(action.scheme.name)
         }

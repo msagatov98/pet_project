@@ -19,7 +19,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,34 +29,50 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.myapplication.common.ui.Screen
-import com.example.myapplication.common.ui.component.Spacer
+import com.example.myapplication.common.ui.presentation.screen.Screen
+import com.example.myapplication.common.ui.presentation.component.Spacer
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.onBoardingScreen(
     navController: NavController,
 ) {
     composable<Screen.OnBoarding> {
-        OnBoardingScreen(
-            state = OnBoardingState(),
-            onEvent = { event ->
-                navController.navigate(Screen.Pager) {
-                    popUpTo(navController.graph.id) {
-                        inclusive = true
-                    }
-                }
+        val viewModel: OnBoardingViewModel = koinViewModel()
+        val navigator = remember { OnBoardingNavigator(navController) }
+        val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+        HandleEffect(effect = viewModel.effect) { effect ->
+            when (effect) {
+                Effect.NavigateToHome ->
+                    navigator.navigateToHome()
             }
+        }
+
+        OnBoardingScreen(
+            state = state,
+            onEvent = viewModel::action,
         )
     }
 }
 
 @Composable
+fun <T> HandleEffect(effect: Flow<T>, block: (T) -> Unit) {
+    LaunchedEffect(Unit) {
+        effect.collectLatest(block)
+    }
+}
+
+@Composable
 fun OnBoardingScreen(
-    state: OnBoardingState,
-    onEvent: (OnBoardingEvent) -> Unit,
+    state: UiState,
+    onEvent: (Action) -> Unit,
 ) {
     val pagerState = rememberPagerState { state.data.size }
     val coroutineScope = rememberCoroutineScope()
@@ -98,7 +116,7 @@ fun OnBoardingScreen(
                 .fillMaxWidth()
                 .padding(bottom = 24.dp, start = 16.dp, end = 16.dp),
         ) {
-            TextButton(onClick = { onEvent(OnBoardingEvent.NavigateToHome) }) {
+            TextButton(onClick = { onEvent(Action.SkipOnBoarding) }) {
                 Text(text = "Skip")
             }
 
@@ -128,7 +146,7 @@ fun OnBoardingScreen(
             TextButton(
                 onClick = {
                     if (pagerState.isLast) {
-                        onEvent(OnBoardingEvent.NavigateToHome)
+                        onEvent(Action.SkipOnBoarding)
                     } else {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)

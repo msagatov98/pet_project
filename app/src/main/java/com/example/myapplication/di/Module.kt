@@ -2,13 +2,18 @@ package com.example.myapplication.di
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.example.myapplication.common.ui.presentation.AppViewModel
+import com.example.myapplication.common.ui.data.UiRepository
 import com.example.myapplication.feature.home.data.HomeApi
 import com.example.myapplication.feature.home.data.HomeRepository
+import com.example.myapplication.feature.home.data.PokemonDao
+import com.example.myapplication.feature.home.data.PokemonDatabase
+import com.example.myapplication.feature.home.data.RemoteKeysDao
 import com.example.myapplication.feature.home.presentation.HomeViewModel
+import com.example.myapplication.feature.onboarding.OnBoardingViewModel
 import com.example.myapplication.feature.profile.ProfileViewModel
-import com.example.myapplication.common.ui.AppViewModel
-import com.example.myapplication.common.ui.UiRepository
 import com.example.myapplication.feature.second.SecondViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -34,6 +39,7 @@ private val presentationModule = module {
     single {
         HomeRepository(
             homeApi = get(),
+            pokemonDatabase = get()
         )
     }
 
@@ -59,6 +65,12 @@ private val presentationModule = module {
     viewModel {
         AppViewModel(
             uiRepository = get(),
+        )
+    }
+
+    viewModel {
+        OnBoardingViewModel(
+            uiRepository = get()
         )
     }
 }
@@ -87,7 +99,24 @@ private val networkModule = module {
     }
 }
 
-val appModule = presentationModule + networkModule
+private val dataBaseModule = module {
+
+    single<PokemonDatabase> {
+        Room
+            .databaseBuilder(androidContext(), PokemonDatabase::class.java, "pokemon_database")
+            .build()
+    }
+
+    single<PokemonDao> {
+        get<PokemonDatabase>().getPokemonDao()
+    }
+
+    single<RemoteKeysDao> {
+        get<PokemonDatabase>().getRemoteKeysDao()
+    }
+}
+
+val appModule = presentationModule + networkModule + dataBaseModule
 
 private fun provideRetrofit(
     moshi: Moshi,

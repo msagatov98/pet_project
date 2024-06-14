@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridItemScope
+import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -26,7 +28,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.myapplication.common.ui.component.Shimmer
+import com.example.myapplication.common.ui.presentation.component.Shimmer
 import com.example.myapplication.feature.home.data.Data
 import org.koin.androidx.compose.koinViewModel
 
@@ -81,25 +83,57 @@ private fun HomeScreen(
                 }
             }
 
-            LoadState.Loading ->
-                items(20) {
-                    Shimmer(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(120.dp),
-                        cornerRadius = 12.dp,
-                    )
-                }
+            LoadState.Loading -> items(20) {
+                Shimmer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(120.dp),
+                    cornerRadius = 12.dp,
+                )
+            }
 
-
-            is LoadState.NotLoading ->
-                items(pagingData.itemCount) {
-                    PokemonCard(
-                        pokemon = pagingData[it] ?: return@items,
-                        onClick = onClick
-                    )
-                }
+            is LoadState.NotLoading -> items(
+                count = pagingData.itemCount,
+            ) {
+                PokemonCard(
+                    pokemon = pagingData[it] ?: return@items,
+                    onClick = onClick
+                )
+            }
         }
+
+        pagingLoadStateItem(
+            loadState = pagingData.loadState.append,
+            loading = {
+                Shimmer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(120.dp),
+                    cornerRadius = 12.dp,
+                )
+            }
+        )
+    }
+}
+
+fun LazyGridScope.pagingLoadStateItem(
+    loadState: LoadState,
+    keySuffix: String? = null,
+    loading: (@Composable LazyGridItemScope.() -> Unit)? = null,
+    error: (@Composable LazyGridItemScope.(LoadState.Error) -> Unit)? = null,
+) {
+    if (loading != null && loadState == LoadState.Loading) {
+        items(
+            count = 4,
+            itemContent = { loading() } ,
+        )
+    }
+    if (error != null && loadState is LoadState.Error) {
+        item(
+            content = { error(loadState)},
+            key = keySuffix?.let { "errorItem_$it" },
+            span = { GridItemSpan(2) },
+        )
     }
 }
 

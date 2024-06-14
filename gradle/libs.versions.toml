@@ -8,15 +8,18 @@ versionCode = "1"
 versionName = "1.0"
 java = "VERSION_17"
 
-# ----- Plugins -----
-agp = "8.4.2"
-
 # language
 kotlin = "2.0.0"
 kotlinCoroutine = "1.8.0"
 kotlinxSerializationJson = "1.6.3"
 
+# ----- Plugins -----
+agp = "8.4.2"
+ksp = "2.0.0-1.0.22"
+
+
 # androidX
+room = "2.6.1"
 pagingCompose = "3.3.0"
 startupRuntime = "1.1.1"
 activityCompose = "1.9.0"
@@ -45,6 +48,10 @@ benchmarkMacroJunit4 = "1.2.4"
 
 [libraries]
 # androidX
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
@@ -81,6 +88,8 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
 
 [plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+androidx-room = { id = "androidx.room", version.ref = "room" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }

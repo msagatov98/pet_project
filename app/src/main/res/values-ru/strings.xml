@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_bar_home">Главная</string>
+    <string name="bottom_bar_search">Поиск</string>
+    <string name="bottom_bar_profile">Профиль</string>
+
+    <!-- Profile -->
+    <string name="profile_language">Язык</string>
+    <string name="profile_app_theme">Тема приложения</string>
+    <string name="profile_color_scheme">Цветовая схема</string>
+</resources>

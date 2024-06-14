@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.room)
 }
 
 android {
@@ -16,6 +18,8 @@ android {
         targetSdk = libs.versions.targetSdk.get().toInteger()
         versionCode = libs.versions.versionCode.get().toInteger()
         versionName = libs.versions.versionName.get()
+
+        resourceConfigurations += ["en", "ru", "kk"]
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,10 +35,12 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.valueOf(libs.versions.java.get())
         targetCompatibility = JavaVersion.valueOf(libs.versions.java.get())
     }
+
     kotlinOptions {
         jvmTarget = JavaVersion.valueOf(libs.versions.java.get()).toString()
     }
@@ -42,6 +48,14 @@ android {
     buildFeatures {
         compose = true
     }
+
+    room {
+        schemaDirectory "$projectDir/schemas"
+    }
+
+//    androidResources {
+//        generateLocaleConfig = true
+//    }
 }
 
 dependencies {
@@ -50,10 +64,14 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.koin.androidx.compose)
 
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.startup.runtime)
     implementation(libs.androidx.profileinstaller)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.paging.compose)
+    ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
@@ -61,7 +79,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.moshi.kotlin)
-    implementation libs.moshi
+    implementation(libs.moshi)
     implementation(libs.okhttp)
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
@@ -77,4 +95,9 @@ dependencies {
     releaseImplementation(libs.chucker.library.no.op)
 
     baselineProfile(project(":app:baselineprofile"))
+}
+
+composeCompiler {
+    enableStrongSkippingMode = true
+    includeSourceInformation = true
 }

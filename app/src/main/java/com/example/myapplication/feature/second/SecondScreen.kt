@@ -23,7 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.myapplication.common.ui.Screen
+import com.example.myapplication.common.ui.presentation.screen.Screen
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 

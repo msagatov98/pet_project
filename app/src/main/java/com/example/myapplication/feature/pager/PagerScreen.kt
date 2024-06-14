@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.myapplication.common.ui.Screen
+import com.example.myapplication.common.ui.presentation.screen.Screen
 import com.example.myapplication.feature.home.presentation.HomeScreen
 import com.example.myapplication.feature.profile.ProfileScreen
 import com.example.myapplication.feature.search.SearchScreen
