@@ -14,7 +14,7 @@ enum class AppTheme {
 }
 
 enum class ColorScheme {
-    Default, Themed
+    Default, Dynamic
 }
 
 @Composable
@@ -36,14 +36,16 @@ fun AppTheme(
                 val dynamicColorScheme = when (state.appTheme) {
                     AppTheme.Dark -> dynamicDarkColorScheme(context)
                     AppTheme.Light -> dynamicLightColorScheme(context)
-                    AppTheme.System -> if (isSystemInDarkTheme()) dynamicDarkColorScheme(context) else dynamicLightColorScheme(
-                        context
-                    )
+                    AppTheme.System -> if (isSystemInDarkTheme()) {
+                        dynamicDarkColorScheme(context)
+                    } else {
+                        dynamicLightColorScheme(context)
+                    }
                 }
 
                 when (state.colorScheme) {
                     ColorScheme.Default -> colorScheme
-                    ColorScheme.Themed -> dynamicColorScheme
+                    ColorScheme.Dynamic -> dynamicColorScheme
                 }
             }
 

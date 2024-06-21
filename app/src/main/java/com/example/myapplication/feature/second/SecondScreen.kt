@@ -1,5 +1,6 @@
 package com.example.myapplication.feature.second
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,9 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,6 +30,7 @@ import androidx.navigation.toRoute
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.myapplication.common.ui.presentation.screen.Screen
+import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -86,13 +93,19 @@ fun StateIndicator(
     value: Int,
 ) {
     Box(modifier = modifier) {
+        var progress by remember { mutableStateOf(0.1f) }
+        val animatedProgress by animateFloatAsState(
+            targetValue = progress,
+            animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        )
         LinearProgressIndicator(
-            progress = { value / 100F },
+            progress = { animatedProgress },
+            gapSize = 0.dp,
+            strokeCap = ProgressIndicatorDefaults.CircularDeterminateStrokeCap,
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxWidth()
                 .height(28.dp)
-                .clip(RoundedCornerShape(16.dp))
         )
 
         Text(
@@ -114,5 +127,10 @@ fun StateIndicator(
                 MaterialTheme.colorScheme.onSurfaceVariant
             },
         )
+
+        LaunchedEffect(key1 = Unit) {
+            delay(200)
+            progress = value / 100F
+        }
     }
 }

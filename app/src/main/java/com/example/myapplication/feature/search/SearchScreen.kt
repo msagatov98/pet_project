@@ -28,7 +28,6 @@ fun SearchScreen() {
         contentAlignment = Alignment.Center,
     ) {
         Button(onClick = { isVisible = true }) {
-
             Text(text = "Show BS")
         }
     }
@@ -37,7 +36,7 @@ fun SearchScreen() {
         ModalBottomSheet(
             onDismissRequest = { isVisible = false },
             sheetState = rememberModalBottomSheetState(
-                skipPartiallyExpanded = false
+                skipPartiallyExpanded = true
             ),
 
             ) {

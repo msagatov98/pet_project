@@ -1,5 +1,6 @@
 package com.example.myapplication.feature.profile
 
+import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -38,13 +39,15 @@ private fun ProfileScreen(
                 onAction(ProfileAction.OnAppThemeSelected(AppTheme.valueOf(it)))
             }
         )
-        Selector(
-            text = stringResource(R.string.profile_color_scheme),
-            options = state.colorSchemes.map { it.name },
-            onSelect = {
-                onAction(ProfileAction.OnColorSchemeSelected(ColorScheme.valueOf(it)))
-            }
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Selector(
+                text = stringResource(R.string.profile_color_scheme),
+                options = state.colorSchemes.map { it.name },
+                onSelect = {
+                    onAction(ProfileAction.OnColorSchemeSelected(ColorScheme.valueOf(it)))
+                }
+            )
+        }
         Selector(
             text = stringResource(R.string.profile_language),
             options = state.languages,

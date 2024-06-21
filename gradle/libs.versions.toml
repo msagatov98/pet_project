@@ -17,7 +17,6 @@ kotlinxSerializationJson = "1.6.3"
 agp = "8.4.2"
 ksp = "2.0.0-1.0.22"
 
-
 # androidX
 room = "2.6.1"
 pagingCompose = "3.3.0"
@@ -26,8 +25,8 @@ activityCompose = "1.9.0"
 coreSplashscreen = "1.0.1"
 
 # compose
-compose = "1.6.8"
-material = "1.2.1"
+compose = "1.7.0-beta03"
+material = "1.3.0-beta03"
 navigationCompose = "2.8.0-beta03"
 
 # libs
