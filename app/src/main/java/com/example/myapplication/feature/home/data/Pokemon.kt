@@ -15,7 +15,6 @@ data class Pokemon(
     @ColumnInfo(name = "image_url")
     val imageUrl: String,
 
-
     @ColumnInfo(name = "page")
     var page: Int,
 )

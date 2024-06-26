@@ -8,12 +8,16 @@ import com.example.myapplication.common.ui.presentation.theme.AppTheme
 import com.example.myapplication.common.ui.presentation.theme.ColorScheme
 import kotlinx.coroutines.flow.MutableStateFlow
 
+private const val APP_THEME_KEY = "appThemeKey"
+private const val COLOR_SCHEME_KEY = "colorSchemeKey"
+private const val ON_BOARDING_KEY = "onBoardingKey"
+
 class UiRepository(
     private val sharedPreferences: SharedPreferences,
 ) {
     val appTheme = MutableStateFlow(AppTheme.System)
     val colorScheme = MutableStateFlow(ColorScheme.Default)
-    val onBoardingSkipped = MutableStateFlow(sharedPreferences.getBoolean("onBoardingKey", false))
+    val onBoardingSkipped = MutableStateFlow(sharedPreferences.getBoolean(ON_BOARDING_KEY, false))
 
     init {
         initTheme()
@@ -21,14 +25,14 @@ class UiRepository(
 
     fun setAppTheme(value: String) {
         sharedPreferences.edit {
-            putString("appThemeKey", value)
+            putString(APP_THEME_KEY, value)
         }
         initTheme()
     }
 
     fun setColorScheme(value: String) {
         sharedPreferences.edit {
-            putString("colorSchemeKey", value)
+            putString(COLOR_SCHEME_KEY, value)
         }
         initTheme()
     }
@@ -40,13 +44,14 @@ class UiRepository(
 
     fun onBoardingSkipped() {
         sharedPreferences.edit {
-            putBoolean("onBoardingKey", true)
+            putBoolean(ON_BOARDING_KEY, true)
         }
     }
 
     private fun initTheme() {
-        val theme = sharedPreferences.getString("appThemeKey", AppTheme.System.name).orEmpty()
-        val color = sharedPreferences.getString("colorSchemeKey", ColorScheme.Default.name).orEmpty()
+        val theme = sharedPreferences.getString(APP_THEME_KEY, AppTheme.System.name).orEmpty()
+        val color =
+            sharedPreferences.getString(COLOR_SCHEME_KEY, ColorScheme.Default.name).orEmpty()
         appTheme.value = AppTheme.valueOf(theme)
         colorScheme.value = ColorScheme.valueOf(color)
     }

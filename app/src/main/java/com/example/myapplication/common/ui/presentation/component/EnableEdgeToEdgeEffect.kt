@@ -1,6 +1,5 @@
 package com.example.myapplication.common.ui.presentation.component
 
-import android.content.res.Configuration
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
@@ -23,12 +22,11 @@ fun EnableEdgeToEdgeEffect(state: AppState) {
         val systemBarStyle = SystemBarStyle.auto(
             lightScrim = color.toArgb(),
             darkScrim = color.toArgb(),
-            detectDarkMode = { resources ->
+            detectDarkMode = {
                 when (state.appTheme) {
                     AppTheme.Dark -> true
                     AppTheme.Light -> false
-                    AppTheme.System -> (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
-                            Configuration.UI_MODE_NIGHT_YES
+                    AppTheme.System -> isDarkMode
                 }
             }
         )
