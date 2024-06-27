@@ -4,12 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.example.myapplication.feature.home.data.Data
-import com.example.myapplication.feature.home.data.HomeRepository
+import com.example.myapplication.feature.home.data.repository.HomeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 class HomeViewModel(
     repository: HomeRepository,
@@ -20,7 +18,7 @@ class HomeViewModel(
     init {
         val paging = repository.getPokemonPagingSource()
             .map {
-                it.map { Data.Result(name = it.name, url = it.imageUrl) }
+                it.map { Pokemon(id = it.id, name = it.name, url = it.imageUrl) }
             }
             .cachedIn(viewModelScope)
         homeState.update { it.copy(pokemonPagingSource = paging) }

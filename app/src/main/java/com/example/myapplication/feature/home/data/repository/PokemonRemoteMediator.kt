@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.home.data
+package com.example.myapplication.feature.home.data.repository
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -6,6 +6,8 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.myapplication.common.network.Resource
+import com.example.myapplication.feature.home.data.model.Pokemon
+import com.example.myapplication.feature.home.data.model.RemoteKeys
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
@@ -51,11 +53,7 @@ class PokemonRemoteMediator(
             }
         }
 
-
-        val dataResource = homeRepository.getData(page)
-
-
-        return when (dataResource) {
+        return when (val dataResource = homeRepository.getData(page)) {
             is Resource.Error -> MediatorResult.Error(dataResource.exception)
             Resource.Loading -> MediatorResult.Success(endOfPaginationReached = true)
             is Resource.Success -> {

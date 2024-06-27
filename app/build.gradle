@@ -52,10 +52,6 @@ android {
     room {
         schemaDirectory "$projectDir/schemas"
     }
-
-//    androidResources {
-//        generateLocaleConfig = true
-//    }
 }
 
 dependencies {
@@ -78,11 +74,10 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.android)
 
-    implementation(libs.moshi.kotlin)
-    implementation(libs.moshi)
-    implementation(libs.okhttp)
-    implementation(libs.retrofit)
-    implementation(libs.converter.moshi)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.client.content.negotiatin)
 
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)

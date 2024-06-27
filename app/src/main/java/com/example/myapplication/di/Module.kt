@@ -1,28 +1,26 @@
 package com.example.myapplication.di
 
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.myapplication.common.ui.presentation.AppViewModel
 import com.example.myapplication.common.ui.data.UiRepository
-import com.example.myapplication.feature.home.data.HomeApi
-import com.example.myapplication.feature.home.data.HomeRepository
-import com.example.myapplication.feature.home.data.PokemonDao
-import com.example.myapplication.feature.home.data.PokemonDatabase
-import com.example.myapplication.feature.home.data.RemoteKeysDao
+import com.example.myapplication.common.ui.presentation.AppViewModel
+import com.example.myapplication.feature.home.data.repository.HomeRepository
+import com.example.myapplication.feature.home.data.repository.PokemonDatabase
 import com.example.myapplication.feature.home.presentation.HomeViewModel
 import com.example.myapplication.feature.onboarding.OnBoardingViewModel
 import com.example.myapplication.feature.profile.ProfileViewModel
 import com.example.myapplication.feature.second.SecondViewModel
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.OkHttpClient
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.http.URLProtocol
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 private val presentationModule = module {
 
@@ -38,8 +36,8 @@ private val presentationModule = module {
 
     single {
         HomeRepository(
-            homeApi = get(),
-            pokemonDatabase = get()
+            pokemonDatabase = get(),
+            httpClient = get(),
         )
     }
 
@@ -77,25 +75,26 @@ private val presentationModule = module {
 
 private val networkModule = module {
 
-    factory<HomeApi> {
-        get<Retrofit>().create(HomeApi::class.java)
-    }
-
     single {
-        provideRetrofit(
-            moshi = get(),
-            okHttpClient = get(),
-        )
-    }
-
-    single {
-        provideMoshi()
-    }
-
-    single {
-        provideOkHttp(
-            context = androidContext(),
-        )
+        HttpClient(OkHttp) {
+            engine {
+                addInterceptor(ChuckerInterceptor(get()))
+            }
+            install(ContentNegotiation) {
+                json(
+                    Json {
+                        isLenient = true
+                        ignoreUnknownKeys = true
+                    }
+                )
+            }
+            defaultRequest {
+                host = "pokeapi.co"
+                url {
+                    protocol = URLProtocol.HTTPS
+                }
+            }
+        }
     }
 }
 
@@ -106,39 +105,6 @@ private val dataBaseModule = module {
             .databaseBuilder(androidContext(), PokemonDatabase::class.java, "pokemon_database")
             .build()
     }
-
-    single<PokemonDao> {
-        get<PokemonDatabase>().getPokemonDao()
-    }
-
-    single<RemoteKeysDao> {
-        get<PokemonDatabase>().getRemoteKeysDao()
-    }
 }
 
 val appModule = presentationModule + networkModule + dataBaseModule
-
-private fun provideRetrofit(
-    moshi: Moshi,
-    okHttpClient: OkHttpClient,
-): Retrofit {
-    return Retrofit.Builder()
-        .client(okHttpClient)
-        .baseUrl("https://pokeapi.co/api/v2/")
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .build()
-}
-
-private fun provideMoshi(): Moshi {
-    return Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-}
-
-private fun provideOkHttp(
-    context: Context,
-): OkHttpClient {
-    return OkHttpClient.Builder()
-        .addInterceptor(ChuckerInterceptor(context))
-        .build()
-}

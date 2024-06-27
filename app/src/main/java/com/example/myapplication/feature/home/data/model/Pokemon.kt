@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.home.data
+package com.example.myapplication.feature.home.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

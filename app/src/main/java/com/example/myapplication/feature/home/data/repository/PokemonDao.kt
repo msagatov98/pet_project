@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.home.data
+package com.example.myapplication.feature.home.data.repository
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
@@ -7,6 +7,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.RoomDatabase
+import com.example.myapplication.feature.home.data.model.Pokemon
+import com.example.myapplication.feature.home.data.model.RemoteKeys
 
 @Dao
 interface PokemonDao {

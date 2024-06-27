@@ -34,7 +34,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.myapplication.common.ui.presentation.component.Shimmer
 import com.example.myapplication.common.ui.presentation.component.rippleClickable
-import com.example.myapplication.feature.home.data.Data
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -51,7 +50,7 @@ fun HomeScreen(navController: NavController) {
 @Composable
 private fun HomeScreen(
     state: HomeState,
-    onClick: (Data.Result) -> Unit,
+    onClick: (Pokemon) -> Unit,
 ) {
     val pagingData = state.pokemonPagingSource.collectAsLazyPagingItems()
     LazyVerticalGrid(
@@ -97,13 +96,25 @@ private fun HomeScreen(
                 )
             }
 
-            is LoadState.NotLoading -> items(
-                count = pagingData.itemCount,
-            ) {
-                PokemonCard(
-                    pokemon = pagingData[it] ?: return@items,
-                    onClick = onClick
-                )
+            is LoadState.NotLoading -> {
+                items(
+                    count = pagingData.itemCount,
+                ) {
+                    val data = pagingData[it]
+                    if (data != null) {
+                        PokemonCard(
+                            pokemon = data,
+                            onClick = onClick
+                        )
+                    } else {
+                        Shimmer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(120.dp),
+                            cornerRadius = 12.dp,
+                        )
+                    }
+                }
             }
         }
 
@@ -145,8 +156,8 @@ fun LazyGridScope.pagingLoadStateItem(
 
 @Composable
 fun PokemonCard(
-    pokemon: Data.Result,
-    onClick: (Data.Result) -> Unit,
+    pokemon: Pokemon,
+    onClick: (Pokemon) -> Unit,
 ) {
     Column(
         modifier = Modifier

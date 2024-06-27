@@ -3,7 +3,7 @@ package com.example.myapplication.feature.second
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.common.network.Resource
-import com.example.myapplication.feature.home.data.HomeRepository
+import com.example.myapplication.feature.home.data.repository.HomeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
