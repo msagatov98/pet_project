@@ -13,7 +13,7 @@
         android:theme="@style/SplashScreen">
 
         <activity
-            android:name=".common.ui.presentation.AppActivity"
+            android:name=".core.android.ui.presentation.AppActivity"
             android:exported="true">
 
             <intent-filter>
@@ -29,10 +29,10 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="com.example.myapplication.common.startup.KoinInitializer"
+                android:name="com.example.myapplication.core.android.startup.KoinInitializer"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="com.example.myapplication.common.startup.CoilInitializer"
+                android:name="com.example.myapplication.core.android.startup.CoilInitializer"
                 android:value="androidx.startup" />
         </provider>
 

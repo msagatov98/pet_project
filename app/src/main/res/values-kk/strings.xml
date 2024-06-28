@@ -4,8 +4,11 @@
     <string name="bottom_bar_search">Іздеу</string>
     <string name="bottom_bar_profile">Профиль</string>
 
-    <!-- Profile -->
-    <string name="profile_language">Тіл</string>
-    <string name="profile_app_theme">App theme</string>
-    <string name="profile_color_scheme">Tүс схемасы</string>
+    <!-- Settings -->
+    <string name="settings_language">Тіл</string>
+    <string name="settings_app_theme">App theme</string>
+    <string name="settings_color_scheme">Tүс схемасы</string>
+
+    <!-- Pokemon -->
+    <string name="pokemon_title">Покемондар тізімі</string>
 </resources>

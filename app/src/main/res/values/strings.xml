@@ -1,12 +1,15 @@
 <resources>
-    <string name="app_name" translatable="false">My Application</string>
+    <string name="app_name" translatable="false">Pet project</string>
 
     <string name="bottom_bar_home">Home</string>
     <string name="bottom_bar_search">Search</string>
     <string name="bottom_bar_profile">Profile</string>
 
-    <!-- Profile -->
-    <string name="profile_language">Language</string>
-    <string name="profile_app_theme">App theme</string>
-    <string name="profile_color_scheme">Color scheme</string>
+    <!-- Settings -->
+    <string name="settings_language">Language</string>
+    <string name="settings_app_theme">App theme</string>
+    <string name="settings_color_scheme">Color scheme</string>
+
+    <!-- Pokemon -->
+    <string name="pokemon_title">Pokemon List</string>
 </resources>
