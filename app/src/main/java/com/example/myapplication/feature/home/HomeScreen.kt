@@ -11,22 +11,22 @@ import androidx.navigation.compose.composable
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
 import com.example.myapplication.feature.pokemon.presentation.navigation.PokemonNavigator
 import com.example.myapplication.feature.pokemon.presentation.screen.list.PokemonListScreen
-import com.example.myapplication.feature.search.SearchScreen
+import com.example.myapplication.feature.imagepicker.ImagePickerScreen
 import com.example.myapplication.feature.settings.SettingsScreen
 
 object HomeScreen {
     const val HOME_SCREEN_COUNT = 3
 
     const val POKEMON_SCREEN_INDEX = 0
-    const val SEARCH_SCREEN_INDEX = 1
-    const val PROFILE_SCREEN_INDEX = 2
+    const val IMAGE_PICKER_SCREEN_INDEX = 1
+    const val SETTINGS_SCREEN_INDEX = 2
 }
 
 fun NavGraphBuilder.homeScreen(
     pagerState: PagerState,
     navController: NavController,
 ) {
-    composable<Screen.Pager> {
+    composable<Screen.Home> {
         HorizontalPager(
             state = pagerState,
             userScrollEnabled = false,
@@ -38,8 +38,8 @@ fun NavGraphBuilder.homeScreen(
                         navigator = remember { PokemonNavigator(navController) }
                     )
 
-                HomeScreen.SEARCH_SCREEN_INDEX -> SearchScreen()
-                HomeScreen.PROFILE_SCREEN_INDEX -> SettingsScreen()
+                HomeScreen.IMAGE_PICKER_SCREEN_INDEX -> ImagePickerScreen()
+                HomeScreen.SETTINGS_SCREEN_INDEX -> SettingsScreen()
 
                 else -> Unit
             }

@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.onboarding.navigation
+package com.example.myapplication.feature.onboarding.presentation.navigation
 
 import androidx.navigation.NavController
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
@@ -8,7 +8,7 @@ class OnBoardingNavigator(
 ) {
 
     fun navigateToHome() {
-        navController.navigate(Screen.Pager) {
+        navController.navigate(Screen.Home) {
             popUpTo(navController.graph.id) {
                 inclusive = true
             }

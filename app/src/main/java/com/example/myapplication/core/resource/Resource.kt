@@ -1,8 +1,5 @@
 package com.example.myapplication.core.resource
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-
 sealed interface Resource<out T> {
     data object Loading : Resource<Nothing>
     data class Success<out T>(val data: T) : Resource<T>
@@ -13,14 +10,11 @@ suspend fun <T> apiCall(
     call: suspend () -> T,
 ): Resource<T> {
     return try {
-        withContext(Dispatchers.IO) {
-            Resource.Success(call())
-        }
+        Resource.Success(call())
     } catch (e: Exception) {
         Resource.Error(e)
     }
 }
-
 
 fun <T : Any, R : Any> Resource<T>.map(mapper: (T) -> R): Resource<R> {
     return when (this) {

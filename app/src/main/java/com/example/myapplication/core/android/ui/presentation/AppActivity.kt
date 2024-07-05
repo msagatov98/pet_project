@@ -21,7 +21,7 @@ import com.example.myapplication.core.android.ui.presentation.component.BottomBa
 import com.example.myapplication.core.android.ui.presentation.component.EnableEdgeToEdgeEffect
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
 import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
-import com.example.myapplication.feature.onboarding.screen.onBoardingScreen
+import com.example.myapplication.feature.onboarding.presentation.screen.onBoardingScreen
 import com.example.myapplication.feature.home.HomeScreen
 import com.example.myapplication.feature.home.homeScreen
 import com.example.myapplication.feature.pokemon.presentation.screen.detail.pokemonDetailScreen
@@ -47,7 +47,7 @@ class AppActivity : AppCompatActivity() {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = navBackStackEntry?.destination?.route
             val isBottomBarVisible = remember(currentRoute) {
-                currentRoute?.contains(Screen.Pager.javaClass.simpleName) == true
+                currentRoute?.contains(Screen.Home.javaClass.simpleName) == true
             }
 
             Scaffold(

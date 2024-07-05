@@ -57,14 +57,7 @@ class PokemonRemoteMediator(
             is Resource.Error -> MediatorResult.Error(dataResource.exception)
             Resource.Loading -> MediatorResult.Success(endOfPaginationReached = true)
             is Resource.Success -> {
-                val pokemonList = dataResource.data.results.map {
-                    Pokemon(
-                        id = UUID.randomUUID().toString(),
-                        name = it.name,
-                        imageUrl = it.url,
-                        page = page,
-                    )
-                }
+                val pokemonList = dataResource.data
 
                 val endOfPaginationReached = pokemonList.isEmpty()
 

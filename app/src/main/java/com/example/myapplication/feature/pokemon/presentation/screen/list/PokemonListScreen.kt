@@ -24,20 +24,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
-import coil.request.ImageRequest
 import com.example.myapplication.R
 import com.example.myapplication.core.android.ui.presentation.component.Shimmer
 import com.example.myapplication.core.android.ui.presentation.component.rippleClickable
+import com.example.myapplication.core.ext.errorMessage
 import com.example.myapplication.feature.pokemon.presentation.model.Pokemon
 import com.example.myapplication.feature.pokemon.presentation.navigation.PokemonNavigator
 import org.koin.androidx.compose.koinViewModel
@@ -86,7 +83,7 @@ private fun PokemonListScreen(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "Error: ${res.error.localizedMessage ?: res.error.message}",
+                        text = "Error: ${res.error.errorMessage}",
                         textAlign = TextAlign.Center,
                     )
                 }
@@ -106,10 +103,15 @@ private fun PokemonListScreen(
                     count = pagingData.itemCount,
                 ) {
                     val data = pagingData[it]
+                    val onClickLambda = remember<(Pokemon) -> Unit> {
+                        {
+                            onClick(it)
+                        }
+                    }
                     if (data != null) {
                         PokemonCard(
                             pokemon = { data },
-                            onClick = { onClick(data) }
+                            onClick = { onClickLambda(data) }
                         )
                     } else {
                         Shimmer(

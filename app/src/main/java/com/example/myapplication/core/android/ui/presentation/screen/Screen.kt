@@ -9,7 +9,7 @@ sealed interface Screen {
     data object OnBoarding : Screen
 
     @Serializable
-    data object Pager : Screen
+    data object Home : Screen
 
     @Serializable
     data class PokemonDetail(

@@ -21,7 +21,7 @@ class AppViewModel(
             appTheme = theme,
             colorScheme = scheme,
             startScreen = if (skipped) {
-                Screen.Pager
+                Screen.Home
             } else {
                 Screen.OnBoarding
             }

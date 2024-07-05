@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.onboarding.model
+package com.example.myapplication.feature.onboarding.presentation.model
 
 import androidx.annotation.DrawableRes
 

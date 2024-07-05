@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
@@ -27,32 +28,28 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.myapplication.core.android.ui.presentation.component.Shimmer
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
-import com.example.myapplication.feature.pokemon.presentation.model.Stat
+import com.example.myapplication.core.ext.errorMessage
+import com.example.myapplication.core.resource.Resource
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 fun NavGraphBuilder.pokemonDetailScreen() {
     composable<Screen.PokemonDetail> {
-        val pokemonDetail = it.toRoute<Screen.PokemonDetail>()
+        val pokemonDetail = remember { it.toRoute<Screen.PokemonDetail>() }
         val viewModel = koinViewModel<PokemonDetailViewModel> {
-            parametersOf(pokemonDetail.name)
+            parametersOf(pokemonDetail.name, pokemonDetail.imageUrl)
         }
-        val stats by viewModel.list.collectAsStateWithLifecycle()
-        PokemonDetailScreen(
-            url = pokemonDetail.imageUrl,
-            name = pokemonDetail.name,
-            stats = stats,
-        )
+        val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+        PokemonDetailScreen(uiState)
     }
 }
 
 @Composable
-fun PokemonDetailScreen(
-    url: String,
-    name: String,
-    stats: List<Stat>,
+private fun PokemonDetailScreen(
+    state: PokemonDetailState,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -60,7 +57,7 @@ fun PokemonDetailScreen(
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(url)
+                .data(state.imageUrl)
                 .build(),
             contentDescription = null,
             modifier = Modifier
@@ -68,25 +65,50 @@ fun PokemonDetailScreen(
                 .height(200.dp)
         )
         Text(
-            text = name,
+            text = state.name,
             modifier = Modifier
                 .padding(8.dp)
         )
 
-        stats.forEach {
-            StateIndicator(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-                name = it.name,
-                value = it.value,
-            )
+        when (val res = state.statsResources) {
+            is Resource.Error -> {
+                Text(
+                    textAlign = TextAlign.Center,
+                    text = res.exception.errorMessage,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                )
+            }
+
+            Resource.Loading -> {
+                repeat(6) {
+                    Shimmer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(36.dp)
+                            .padding(horizontal = 16.dp, vertical = 4.dp)
+                    )
+                }
+            }
+
+            is Resource.Success -> {
+                res.data.forEach {
+                    StateIndicator(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 4.dp),
+                        name = it.name,
+                        value = it.value,
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
-fun StateIndicator(
+private fun StateIndicator(
     modifier: Modifier = Modifier,
     name: String,
     value: Int,
@@ -94,6 +116,7 @@ fun StateIndicator(
     Box(modifier = modifier) {
         var progress by remember { mutableStateOf(0.1f) }
         val animatedProgress by animateFloatAsState(
+            label = "",
             targetValue = progress,
             animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
         )

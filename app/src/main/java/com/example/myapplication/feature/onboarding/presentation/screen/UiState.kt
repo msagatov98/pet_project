@@ -1,8 +1,8 @@
-package com.example.myapplication.feature.onboarding.screen
+package com.example.myapplication.feature.onboarding.presentation.screen
 
 import androidx.compose.runtime.Immutable
 import com.example.myapplication.R
-import com.example.myapplication.feature.onboarding.model.OnBoardingData
+import com.example.myapplication.feature.onboarding.presentation.model.OnBoardingData
 
 @Immutable
 data class UiState(

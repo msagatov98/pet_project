@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.onboarding.screen
+package com.example.myapplication.feature.onboarding.presentation.screen
 
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.core.android.ui.data.UiRepository

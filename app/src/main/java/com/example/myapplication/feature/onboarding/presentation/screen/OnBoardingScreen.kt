@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.onboarding.screen
+package com.example.myapplication.feature.onboarding.presentation.screen
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
@@ -35,7 +35,7 @@ import androidx.navigation.compose.composable
 import com.example.myapplication.core.android.ui.presentation.component.HandleEffect
 import com.example.myapplication.core.android.ui.presentation.component.Spacer
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
-import com.example.myapplication.feature.onboarding.navigation.OnBoardingNavigator
+import com.example.myapplication.feature.onboarding.presentation.navigation.OnBoardingNavigator
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
