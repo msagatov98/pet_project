@@ -1,9 +1,8 @@
 package com.example.myapplication.feature.pokemon.presentation.screen.list
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,10 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyGridItemScope
-import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,18 +18,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil.compose.rememberAsyncImagePainter
 import com.example.myapplication.R
+import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
+import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
 import com.example.myapplication.core.android.ui.presentation.component.Shimmer
-import com.example.myapplication.core.android.ui.presentation.component.rippleClickable
+import com.example.myapplication.core.android.ui.presentation.component.pagingLoadStateItem
 import com.example.myapplication.core.ext.errorMessage
 import com.example.myapplication.feature.pokemon.presentation.model.Pokemon
 import com.example.myapplication.feature.pokemon.presentation.navigation.PokemonNavigator
@@ -56,7 +51,9 @@ private fun PokemonListScreen(
 ) {
     val pagingData = state.pokemonPagingSource.collectAsLazyPagingItems()
     LazyVerticalGrid(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -139,54 +136,13 @@ private fun PokemonListScreen(
     }
 }
 
-fun LazyGridScope.pagingLoadStateItem(
-    loadState: LoadState,
-    keySuffix: String? = null,
-    loading: (@Composable LazyGridItemScope.() -> Unit)? = null,
-    error: (@Composable LazyGridItemScope.(LoadState.Error) -> Unit)? = null,
-) {
-    if (loading != null && loadState == LoadState.Loading) {
-        items(
-            count = 4,
-            itemContent = { loading() },
-        )
-    }
-    if (error != null && loadState is LoadState.Error) {
-        item(
-            content = { error(loadState) },
-            key = keySuffix?.let { "errorItem_$it" },
-            span = { GridItemSpan(2) },
-        )
-    }
-}
-
-
+@ScreenPreview
 @Composable
-fun PokemonCard(
-    pokemon: () -> Pokemon,
-    onClick: () -> Unit,
-) {
-    val color = MaterialTheme.colorScheme.surfaceContainerHighest
-    val poke = remember { pokemon() }
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(120.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .drawBehind { drawRect(color) }
-            .rippleClickable(onClick),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Image(
-            painter = rememberAsyncImagePainter(model = poke.url),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(80.dp)
-        )
-        Text(
-            text = poke.name,
-            modifier = Modifier.padding(8.dp),
+private fun PokemonListScreenPreview() {
+    AppThemePreview {
+        PokemonListScreen(
+            state = PokemonListState(),
+            onClick = { },
         )
     }
 }

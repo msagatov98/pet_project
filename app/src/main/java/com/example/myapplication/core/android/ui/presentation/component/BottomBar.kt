@@ -1,7 +1,9 @@
 package com.example.myapplication.core.android.ui.presentation.component
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -65,6 +67,21 @@ fun BottomBar(pagerState: PagerState) {
             )
         }
     }
+}
+
+@Composable
+@ComponentPreview
+private fun BottomBarPreview() {
+    Column {
+        AppThemePreview {
+            BottomBar(pagerState = rememberPagerState { 1 })
+        }
+        Spacer(size = 24.dp)
+        AppThemePreview(isDarkTheme = true) {
+            BottomBar(pagerState = rememberPagerState { 1 })
+        }
+    }
+
 }
 
 private sealed class BottomNavItem(

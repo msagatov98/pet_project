@@ -9,6 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.myapplication.R
+import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
+import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
 import com.example.myapplication.core.android.ui.presentation.component.Selector
 import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
 import com.example.myapplication.core.android.ui.presentation.theme.ColorScheme
@@ -54,6 +56,17 @@ private fun SettingsScreen(
             onSelect = {
                 onAction(SettingsAction.OnLanguageSelected(it))
             }
+        )
+    }
+}
+
+@ScreenPreview
+@Composable
+private fun SettingsScreenPreview() {
+    AppThemePreview {
+        SettingsScreen(
+            state = SettingsUiState(),
+            onAction = { },
         )
     }
 }

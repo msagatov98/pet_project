@@ -6,6 +6,9 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -53,4 +56,26 @@ private fun Modifier.shimmerEffect(
         ),
         shape = RoundedCornerShape(cornerRadius)
     ).onGloballyPositioned { size = it.size }
+}
+
+@Composable
+@ComponentPreview
+private fun ShimmerPreview() {
+    Column {
+        AppThemePreview {
+            Shimmer(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(200.dp),
+            )
+        }
+        Spacer(size = 24.dp)
+        AppThemePreview(isDarkTheme = true) {
+            Shimmer(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(200.dp)
+            )
+        }
+    }
 }

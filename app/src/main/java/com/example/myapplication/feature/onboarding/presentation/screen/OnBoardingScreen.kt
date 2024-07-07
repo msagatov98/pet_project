@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
@@ -32,8 +31,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
+import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
 import com.example.myapplication.core.android.ui.presentation.component.HandleEffect
 import com.example.myapplication.core.android.ui.presentation.component.Spacer
+import com.example.myapplication.core.android.ui.presentation.component.isLast
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
 import com.example.myapplication.feature.onboarding.presentation.navigation.OnBoardingNavigator
 import kotlinx.coroutines.launch
@@ -62,7 +64,7 @@ fun NavGraphBuilder.onBoardingScreen(
 
 
 @Composable
-fun OnBoardingScreen(
+private fun OnBoardingScreen(
     state: UiState,
     onEvent: (Action) -> Unit,
 ) {
@@ -152,5 +154,13 @@ fun OnBoardingScreen(
     }
 }
 
-val PagerState.isLast: Boolean
-    get() = pageCount - 1 <= currentPage
+@ScreenPreview
+@Composable
+private fun OnBoardingScreenPreview() {
+    AppThemePreview {
+        OnBoardingScreen(
+            state = UiState(),
+            onEvent = { },
+        )
+    }
+}

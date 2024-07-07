@@ -77,3 +77,25 @@ fun Selector(
         }
     }
 }
+
+@Composable
+@ComponentPreview
+private fun SelectorPreview() {
+    Column {
+        AppThemePreview {
+            Selector(
+                text = "example",
+                options = emptyList(),
+                onSelect = { },
+            )
+        }
+        Spacer(size = 16.dp)
+        AppThemePreview(isDarkTheme = true) {
+            Selector(
+                text = "example",
+                options = emptyList(),
+                onSelect = { },
+            )
+        }
+    }
+}
