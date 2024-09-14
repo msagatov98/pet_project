@@ -25,8 +25,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.myapplication.R
-import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
 import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
+import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
 import com.example.myapplication.core.android.ui.presentation.component.Shimmer
 import com.example.myapplication.core.android.ui.presentation.component.pagingLoadStateItem
 import com.example.myapplication.core.ext.errorMessage

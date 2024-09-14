@@ -17,7 +17,8 @@ fun EnableEdgeToEdgeEffect(state: AppState) {
     val isDarkMode = isSystemInDarkTheme()
     val activity = LocalContext.current as ComponentActivity
     val color = MaterialTheme.colorScheme.background
-    DisposableEffect(isDarkMode, state.colorScheme, state.appTheme) {
+    val bottomBarColor = MaterialTheme.colorScheme.surfaceContainer
+    DisposableEffect(isDarkMode, state) {
 
         val systemBarStyle = SystemBarStyle.auto(
             lightScrim = color.toArgb(),
@@ -31,9 +32,23 @@ fun EnableEdgeToEdgeEffect(state: AppState) {
             }
         )
 
+        val bottomBarStyle = SystemBarStyle.auto(
+            lightScrim = bottomBarColor.toArgb(),
+            darkScrim = bottomBarColor.toArgb(),
+            detectDarkMode = {
+                when (state.appTheme) {
+                    AppTheme.Dark -> true
+                    AppTheme.Light -> false
+                    AppTheme.System -> isDarkMode
+                }
+            }
+        )
+
+        val navigationBarState = if (state.isBottomBarVisible) bottomBarStyle else systemBarStyle
+
         activity.enableEdgeToEdge(
             statusBarStyle = systemBarStyle,
-            navigationBarStyle = systemBarStyle,
+            navigationBarStyle = navigationBarState,
         )
         onDispose { }
     }

@@ -10,4 +10,5 @@ data class AppState(
     val appTheme: AppTheme = AppTheme.System,
     val colorScheme: ColorScheme = ColorScheme.Default,
     val startScreen: Screen = Screen.OnBoarding,
+    val isBottomBarVisible: Boolean = false,
 )

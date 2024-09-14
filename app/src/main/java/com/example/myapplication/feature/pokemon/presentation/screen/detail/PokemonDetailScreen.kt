@@ -32,7 +32,7 @@ import org.koin.core.parameter.parametersOf
 fun NavGraphBuilder.pokemonDetailScreen() {
     composable<Screen.PokemonDetail> {
         val pokemonDetail = remember { it.toRoute<Screen.PokemonDetail>() }
-        val viewModel = koinViewModel<PokemonDetailViewModel> {
+        val viewModel: PokemonDetailViewModel = koinViewModel {
             parametersOf(pokemonDetail.name, pokemonDetail.imageUrl)
         }
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()

@@ -4,27 +4,50 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.core.android.ui.data.UiRepository
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class AppViewModel(
-    uiRepository: UiRepository,
+    private val uiRepository: UiRepository,
 ) : ViewModel() {
 
-    val state = combine(
-        uiRepository.appTheme,
-        uiRepository.colorScheme,
-        uiRepository.onBoardingSkipped
-    ) { theme, scheme, skipped ->
-        AppState(
-            appTheme = theme,
-            colorScheme = scheme,
-            startScreen = if (skipped) {
-                Screen.Home
-            } else {
-                Screen.OnBoarding
+    private val _state = MutableStateFlow(AppState())
+    val state = _state.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            combine(
+                uiRepository.appTheme,
+                uiRepository.colorScheme,
+                uiRepository.onBoardingSkipped
+            ) { theme, scheme, skipped ->
+                AppState(
+                    appTheme = theme,
+                    colorScheme = scheme,
+                    startScreen = if (skipped) {
+                        Screen.Home
+                    } else {
+                        Screen.OnBoarding
+                    },
+                )
+            }.collect { newState ->
+                _state.update {
+                    it.copy(
+                        appTheme = newState.appTheme,
+                        colorScheme = newState.colorScheme,
+                        startScreen = newState.startScreen,
+                    )
+                }
             }
-        )
-    }.stateIn(viewModelScope, started = SharingStarted.Eagerly, initialValue = AppState())
+        }
+
+
+    }
+
+    fun setBottomBarVisibility(isVisible: Boolean) {
+        _state.update { it.copy(isBottomBarVisible = isVisible) }
+    }
 }

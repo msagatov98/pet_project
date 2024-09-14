@@ -32,8 +32,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
-import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
 import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
+import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
 import com.example.myapplication.core.android.ui.presentation.component.Spacer
 import org.koin.androidx.compose.koinViewModel
 
@@ -86,7 +86,7 @@ private fun ImagePickerScreen(
             content = { Text(text = "Show BS") },
             onClick = {
                 imagePicker.launch(
-                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly),
                 )
             },
         )
