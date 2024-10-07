@@ -1,7 +1,7 @@
 package com.example.myapplication.feature.settings.screen
 
-import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
-import com.example.myapplication.core.android.ui.presentation.theme.ColorScheme
+import com.example.myapplication.core.ui.theme.AppTheme
+import com.example.myapplication.core.ui.theme.ColorScheme
 
 sealed interface SettingsAction {
     data class OnAppThemeSelected(val theme: AppTheme) : SettingsAction

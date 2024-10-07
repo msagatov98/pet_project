@@ -9,11 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.myapplication.R
-import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
-import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
-import com.example.myapplication.core.android.ui.presentation.component.Selector
-import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
-import com.example.myapplication.core.android.ui.presentation.theme.ColorScheme
+import com.example.myapplication.core.ui.component.AppThemePreview
+import com.example.myapplication.core.ui.component.ScreenPreview
+import com.example.myapplication.core.ui.component.Selector
+import com.example.myapplication.core.ui.theme.AppTheme
+import com.example.myapplication.core.ui.theme.ColorScheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

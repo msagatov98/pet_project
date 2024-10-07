@@ -1,4 +1,4 @@
-package com.example.myapplication.core.android.ui.presentation.component
+package com.example.myapplication.core.ui.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

@@ -25,11 +25,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.myapplication.R
-import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
-import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
-import com.example.myapplication.core.android.ui.presentation.component.Shimmer
-import com.example.myapplication.core.android.ui.presentation.component.pagingLoadStateItem
 import com.example.myapplication.core.ext.errorMessage
+import com.example.myapplication.core.ui.component.AppThemePreview
+import com.example.myapplication.core.ui.component.ScreenPreview
+import com.example.myapplication.core.ui.component.Shimmer
+import com.example.myapplication.core.ui.component.pagingLoadStateItem
 import com.example.myapplication.feature.pokemon.presentation.model.Pokemon
 import com.example.myapplication.feature.pokemon.presentation.navigation.PokemonNavigator
 import org.koin.androidx.compose.koinViewModel

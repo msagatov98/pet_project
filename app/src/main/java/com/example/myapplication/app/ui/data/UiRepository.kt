@@ -1,11 +1,11 @@
-package com.example.myapplication.core.android.ui.data
+package com.example.myapplication.app.ui.data
 
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import androidx.core.os.LocaleListCompat
-import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
-import com.example.myapplication.core.android.ui.presentation.theme.ColorScheme
+import com.example.myapplication.core.ui.theme.AppTheme
+import com.example.myapplication.core.ui.theme.ColorScheme
 import kotlinx.coroutines.flow.MutableStateFlow
 
 private const val APP_THEME_KEY = "appThemeKey"

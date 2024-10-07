@@ -1,4 +1,4 @@
-package com.example.myapplication.core.android.ui.presentation.component
+package com.example.myapplication.core.ui.component
 
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import com.example.myapplication.core.android.ui.presentation.AppState
-import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
+import com.example.myapplication.app.ui.presentation.AppState
+import com.example.myapplication.core.ui.theme.AppTheme
 
 @Composable
 fun EnableEdgeToEdgeEffect(state: AppState) {

@@ -19,10 +19,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
-import com.example.myapplication.core.android.ui.presentation.component.ComponentPreview
-import com.example.myapplication.core.android.ui.presentation.component.Spacer
 import com.example.myapplication.core.ext.empty
+import com.example.myapplication.core.ui.component.AppThemePreview
+import com.example.myapplication.core.ui.component.ComponentPreview
+import com.example.myapplication.core.ui.component.Spacer
 import kotlinx.coroutines.delay
 
 @Composable

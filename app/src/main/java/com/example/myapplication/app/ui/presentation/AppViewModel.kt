@@ -1,9 +1,9 @@
-package com.example.myapplication.core.android.ui.presentation
+package com.example.myapplication.app.ui.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.core.android.ui.data.UiRepository
-import com.example.myapplication.core.android.ui.presentation.screen.Screen
+import com.example.myapplication.app.ui.data.UiRepository
+import com.example.myapplication.core.ui.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine

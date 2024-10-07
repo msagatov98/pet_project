@@ -1,4 +1,4 @@
-package com.example.myapplication.core.android.ui.presentation.screen
+package com.example.myapplication.core.ui
 
 import kotlinx.serialization.Serializable
 

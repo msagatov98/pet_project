@@ -1,4 +1,4 @@
-package com.example.myapplication.core.android.ui.presentation.theme
+package com.example.myapplication.core.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -7,7 +7,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import com.example.myapplication.core.android.ui.presentation.AppState
+import com.example.myapplication.app.ui.presentation.AppState
 
 enum class AppTheme {
     Dark, Light, System

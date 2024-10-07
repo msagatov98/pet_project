@@ -1,8 +1,8 @@
 package com.example.myapplication.feature.settings.screen
 
 import androidx.compose.runtime.Immutable
-import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
-import com.example.myapplication.core.android.ui.presentation.theme.ColorScheme
+import com.example.myapplication.core.ui.theme.AppTheme
+import com.example.myapplication.core.ui.theme.ColorScheme
 
 @Immutable
 data class SettingsUiState(

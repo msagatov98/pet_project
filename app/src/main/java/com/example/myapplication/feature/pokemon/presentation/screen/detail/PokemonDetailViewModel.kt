@@ -2,8 +2,8 @@ package com.example.myapplication.feature.pokemon.presentation.screen.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.core.android.ui.presentation.controller.DefaultScreenController
-import com.example.myapplication.core.android.ui.presentation.controller.ScreenController
+import com.example.myapplication.core.ui.DefaultScreenController
+import com.example.myapplication.core.ui.ScreenController
 import com.example.myapplication.feature.pokemon.data.repository.PokemonRepository
 import kotlinx.coroutines.launch
 

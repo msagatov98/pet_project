@@ -30,12 +30,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
-import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
-import com.example.myapplication.core.android.ui.presentation.component.Spacer
-import com.example.myapplication.core.android.ui.presentation.component.isLast
-import com.example.myapplication.core.android.ui.presentation.screen.Screen
 import com.example.myapplication.core.ext.empty
+import com.example.myapplication.core.ui.Screen
+import com.example.myapplication.core.ui.component.AppThemePreview
+import com.example.myapplication.core.ui.component.ScreenPreview
+import com.example.myapplication.core.ui.component.Spacer
+import com.example.myapplication.core.ui.component.isLast
 import com.example.myapplication.feature.onboarding.presentation.navigation.OnBoardingNavigator
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

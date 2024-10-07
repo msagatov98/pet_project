@@ -16,7 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.myapplication.core.android.ui.presentation.component.rippleClickable
+import com.example.myapplication.core.ui.component.rippleClickable
 import com.example.myapplication.feature.pokemon.presentation.model.Pokemon
 
 @Composable

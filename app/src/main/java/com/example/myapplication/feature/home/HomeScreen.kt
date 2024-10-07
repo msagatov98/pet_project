@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.myapplication.core.android.ui.presentation.screen.Screen
+import com.example.myapplication.core.ui.Screen
 import com.example.myapplication.feature.pokemon.presentation.navigation.PokemonNavigator
 import com.example.myapplication.feature.pokemon.presentation.screen.list.PokemonListScreen
 import com.example.myapplication.feature.imagepicker.screen.ImagePickerScreen

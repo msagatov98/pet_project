@@ -1,4 +1,4 @@
-package com.example.myapplication.core.android.ui.presentation.component
+package com.example.myapplication.core.ui.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

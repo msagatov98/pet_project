@@ -1,4 +1,4 @@
-package com.example.myapplication.core.android.ui.presentation
+package com.example.myapplication.app.ui.presentation
 
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -17,11 +17,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.core.android.ui.presentation.component.BottomBar
-import com.example.myapplication.core.android.ui.presentation.component.EnableEdgeToEdgeEffect
-import com.example.myapplication.core.android.ui.presentation.screen.Screen
-import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
 import com.example.myapplication.core.ext.empty
+import com.example.myapplication.core.ui.Screen
+import com.example.myapplication.core.ui.component.BottomBar
+import com.example.myapplication.core.ui.component.EnableEdgeToEdgeEffect
+import com.example.myapplication.core.ui.theme.AppTheme
 import com.example.myapplication.feature.home.HomeScreen
 import com.example.myapplication.feature.home.homeScreen
 import com.example.myapplication.feature.onboarding.presentation.navigation.OnBoardingNavigator

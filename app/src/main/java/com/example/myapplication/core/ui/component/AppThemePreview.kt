@@ -1,9 +1,9 @@
-package com.example.myapplication.core.android.ui.presentation.component
+package com.example.myapplication.core.ui.component
 
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import com.example.myapplication.core.android.ui.presentation.AppState
-import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
+import com.example.myapplication.app.ui.presentation.AppState
+import com.example.myapplication.core.ui.theme.AppTheme
 
 @Composable
 fun AppThemePreview(

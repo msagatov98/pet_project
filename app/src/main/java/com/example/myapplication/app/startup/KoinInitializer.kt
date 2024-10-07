@@ -1,4 +1,4 @@
-package com.example.myapplication.core.android.startup
+package com.example.myapplication.app.startup
 
 import android.content.Context
 import androidx.startup.Initializer
