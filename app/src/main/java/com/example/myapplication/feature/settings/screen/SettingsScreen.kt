@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.settings
+package com.example.myapplication.feature.settings.screen
 
 import android.os.Build
 import androidx.compose.foundation.layout.Column

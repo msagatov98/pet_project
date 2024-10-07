@@ -29,6 +29,4 @@ sealed interface Action {
     data object SkipOnBoarding : Action
 }
 
-sealed interface Effect {
-    data object NavigateToHome : Effect
-}
+sealed interface Effect

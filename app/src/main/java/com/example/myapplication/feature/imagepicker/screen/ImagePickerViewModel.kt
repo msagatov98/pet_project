@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.imagepicker
+package com.example.myapplication.feature.imagepicker.screen
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel

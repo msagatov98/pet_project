@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.settings
+package com.example.myapplication.feature.settings.screen
 
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.core.android.ui.data.UiRepository

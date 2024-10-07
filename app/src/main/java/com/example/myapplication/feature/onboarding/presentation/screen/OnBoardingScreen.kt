@@ -18,8 +18,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,37 +28,36 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
 import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
-import com.example.myapplication.core.android.ui.presentation.component.HandleEffect
+import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
 import com.example.myapplication.core.android.ui.presentation.component.Spacer
 import com.example.myapplication.core.android.ui.presentation.component.isLast
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
+import com.example.myapplication.core.ext.empty
 import com.example.myapplication.feature.onboarding.presentation.navigation.OnBoardingNavigator
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 fun NavGraphBuilder.onBoardingScreen(
-    navController: NavController,
+    onBoardingNavigator: OnBoardingNavigator,
 ) {
     composable<Screen.OnBoarding> {
-        val viewModel: OnBoardingViewModel = koinViewModel()
-        val navigator = remember { OnBoardingNavigator(navController) }
+        val viewModel: OnBoardingViewModel = koinViewModel {
+            parametersOf(onBoardingNavigator)
+        }
         val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-        HandleEffect(viewModel.effect) { effect ->
-            when (effect) {
-                Effect.NavigateToHome -> navigator.navigateToHome()
+        OnBoardingScreen(state, viewModel::action)
+
+        LaunchedEffect(Unit) {
+            viewModel.effect.collectLatest { effect ->
+                // not implemented
             }
         }
-
-        OnBoardingScreen(
-            state = state,
-            onEvent = viewModel::action,
-        )
     }
 }
 
@@ -66,7 +65,7 @@ fun NavGraphBuilder.onBoardingScreen(
 @Composable
 private fun OnBoardingScreen(
     state: UiState,
-    onEvent: (Action) -> Unit,
+    action: (Action) -> Unit,
 ) {
     val pagerState = rememberPagerState { state.data.size }
     val coroutineScope = rememberCoroutineScope()
@@ -110,7 +109,7 @@ private fun OnBoardingScreen(
                 .fillMaxWidth()
                 .padding(bottom = 24.dp, start = 16.dp, end = 16.dp),
         ) {
-            TextButton(onClick = { onEvent(Action.SkipOnBoarding) }) {
+            TextButton(onClick = { action(Action.SkipOnBoarding) }) {
                 Text(text = "Skip")
             }
 
@@ -120,7 +119,7 @@ private fun OnBoardingScreen(
             ) {
                 repeat(pagerState.pageCount) { iteration ->
                     val color by animateColorAsState(
-                        label = "",
+                        label = String.empty,
                         targetValue = if (pagerState.currentPage == iteration) {
                             MaterialTheme.colorScheme.primary
                         } else {
@@ -140,7 +139,7 @@ private fun OnBoardingScreen(
             TextButton(
                 onClick = {
                     if (pagerState.isLast) {
-                        onEvent(Action.SkipOnBoarding)
+                        action(Action.SkipOnBoarding)
                     } else {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
@@ -160,7 +159,7 @@ private fun OnBoardingScreenPreview() {
     AppThemePreview {
         OnBoardingScreen(
             state = UiState(),
-            onEvent = { },
+            action = { },
         )
     }
 }

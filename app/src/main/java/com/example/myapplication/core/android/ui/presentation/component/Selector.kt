@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.core.ext.empty
 
 private const val ANIMATION_DURATION_MILLIS = 300
 private const val ANIMATION_ARROW_ROTATION_TOP_ANGLE = 180f
@@ -36,7 +37,7 @@ fun Selector(
 ) {
     var expanded by remember { mutableStateOf(false) }
     val arrowRotationDegree by animateFloatAsState(
-        label = "",
+        label = String.empty,
         animationSpec = tween(ANIMATION_DURATION_MILLIS),
         targetValue = if (expanded) {
             ANIMATION_ARROW_ROTATION_TOP_ANGLE

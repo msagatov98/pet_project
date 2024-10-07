@@ -21,8 +21,10 @@ import com.example.myapplication.core.android.ui.presentation.component.BottomBa
 import com.example.myapplication.core.android.ui.presentation.component.EnableEdgeToEdgeEffect
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
 import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
+import com.example.myapplication.core.ext.empty
 import com.example.myapplication.feature.home.HomeScreen
 import com.example.myapplication.feature.home.homeScreen
+import com.example.myapplication.feature.onboarding.presentation.navigation.OnBoardingNavigator
 import com.example.myapplication.feature.onboarding.presentation.screen.onBoardingScreen
 import com.example.myapplication.feature.pokemon.presentation.screen.detail.pokemonDetailScreen
 import org.koin.androidx.compose.koinViewModel
@@ -55,7 +57,7 @@ private fun Content() {
             },
         ) {
             val bottomPadding by animateDpAsState(
-                label = "",
+                label = String.empty,
                 targetValue = if (isBottomBarVisible) {
                     it.calculateBottomPadding()
                 } else {
@@ -70,7 +72,7 @@ private fun Content() {
                     top = it.calculateTopPadding(),
                 )
             ) {
-                onBoardingScreen(navController)
+                onBoardingScreen(OnBoardingNavigator(navController))
                 pokemonDetailScreen()
                 homeScreen(navController = navController, pagerState = pagerState)
             }
@@ -81,8 +83,8 @@ private fun Content() {
 @Composable
 private fun rememberIsBottomBarVisible(navController: NavController): Boolean {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+    val currentRoute = navBackStackEntry?.destination?.route.orEmpty()
     return remember(currentRoute) {
-        currentRoute?.contains(Screen.Home.javaClass.simpleName) == true
+        currentRoute.contains(Screen.Home.javaClass.simpleName)
     }
 }

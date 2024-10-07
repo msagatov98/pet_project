@@ -2,6 +2,7 @@ package com.example.myapplication.feature.pokemon.presentation.screen.detail
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,12 +13,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
+import com.example.myapplication.core.android.ui.presentation.component.ComponentPreview
+import com.example.myapplication.core.android.ui.presentation.component.Spacer
+import com.example.myapplication.core.ext.empty
 import kotlinx.coroutines.delay
 
 @Composable
@@ -27,9 +32,9 @@ fun StateIndicator(
     value: Int,
 ) {
     Box(modifier = modifier) {
-        var progress by remember { mutableStateOf(0.1f) }
+        var progress by remember { mutableFloatStateOf(0.1f) }
         val animatedProgress by animateFloatAsState(
-            label = "",
+            label = String.empty,
             targetValue = progress,
             animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
         )
@@ -66,6 +71,32 @@ fun StateIndicator(
         LaunchedEffect(key1 = Unit) {
             delay(200)
             progress = value / 100F
+        }
+    }
+}
+
+@Composable
+@ComponentPreview
+private fun StateIndicatorPreview() {
+    Column {
+        AppThemePreview {
+            StateIndicator(
+                name = "Example",
+                value = 60,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
+            )
+        }
+        Spacer(height = 16.dp)
+        AppThemePreview(isDarkTheme = true) {
+            StateIndicator(
+                name = "Example",
+                value = 60,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
+            )
         }
     }
 }

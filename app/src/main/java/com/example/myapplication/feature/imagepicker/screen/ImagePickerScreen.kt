@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.imagepicker
+package com.example.myapplication.feature.imagepicker.screen
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -35,6 +35,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.myapplication.core.android.ui.presentation.component.AppThemePreview
 import com.example.myapplication.core.android.ui.presentation.component.ScreenPreview
 import com.example.myapplication.core.android.ui.presentation.component.Spacer
+import com.example.myapplication.core.ext.empty
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -60,7 +61,7 @@ private fun ImagePickerScreen(
         AnimatedVisibility(visible = uiState.imageUri != null) {
             Box {
                 AnimatedContent(
-                    label = "",
+                    label = String.empty,
                     targetState = uiState.imageUri,
                     transitionSpec = {
                         (fadeIn(animationSpec = tween(220, delayMillis = 90)))

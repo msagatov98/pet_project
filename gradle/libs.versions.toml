@@ -11,37 +11,37 @@ java = "VERSION_17"
 # language
 kotlin = "2.0.20"
 kotlinCoroutine = "1.9.0"
-kotlinxSerializationJson = "1.7.2"
+kotlinxSerializationJson = "1.7.3"
 
 # ----- Plugins -----
-agp = "8.6.0"
+agp = "8.7.0"
 ksp = "2.0.20-1.0.24"
 
 # androidX
 room = "2.6.1"
 pagingCompose = "3.3.2"
-startupRuntime = "1.1.1"
+startupRuntime = "1.2.0"
 activityCompose = "1.9.2"
 coreSplashscreen = "1.0.1"
 
 # compose
-compose = "1.7.1"
+compose = "1.7.3"
 material3 = "1.3.0"
-navigationCompose = "2.8.0"
+navigationCompose = "2.8.2"
 
 # libs
-ktor = "2.3.12"
+ktor = "3.0.0-rc-1"
 chucker = "4.0.0"
 coilCompose = "2.7.0"
-koinAndroidxCompose = "3.5.6"
+koinAndroidx = "4.0.0"
 
 # test
 junit = "1.2.1"
 uiautomator = "2.3.0"
 espressoCore = "3.6.1"
-baselineprofile = "1.3.0"
-profileinstaller = "1.3.1"
-benchmarkMacroJunit4 = "1.3.0"
+baselineprofile = "1.3.2"
+profileinstaller = "1.4.1"
+benchmarkMacroJunit4 = "1.3.2"
 
 [libraries]
 # androidX
@@ -75,7 +75,7 @@ ktor-client-content-negotiatin = { module = "io.ktor:ktor-client-content-negotia
 ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 chucker-library = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
 chucker-library-no-op = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidx" }
 
 # test
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }

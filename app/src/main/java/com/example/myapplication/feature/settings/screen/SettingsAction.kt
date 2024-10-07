@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.settings
+package com.example.myapplication.feature.settings.screen
 
 import com.example.myapplication.core.android.ui.presentation.theme.AppTheme
 import com.example.myapplication.core.android.ui.presentation.theme.ColorScheme

@@ -16,4 +16,7 @@ sealed interface Screen {
         val imageUrl: String,
         val name: String,
     ) : Screen
+
+    @Serializable
+    data object BS : Screen
 }

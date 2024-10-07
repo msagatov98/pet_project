@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.core.ext.empty
 
 @Composable
 fun Shimmer(modifier: Modifier, cornerRadius: Dp = 16.dp) {
@@ -34,9 +35,9 @@ private fun Modifier.shimmerEffect(
     cornerRadius: Dp,
 ): Modifier = composed {
     var size by remember { mutableStateOf(IntSize.Zero) }
-    val transition = rememberInfiniteTransition(label = "")
+    val transition = rememberInfiniteTransition(label = String.empty)
     val startOffsetX by transition.animateFloat(
-        label = "",
+        label = String.empty,
         initialValue = -2 * size.width.toFloat(),
         targetValue = 2 * size.width.toFloat(),
         animationSpec = infiniteRepeatable(

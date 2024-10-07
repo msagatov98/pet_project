@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.settings
+package com.example.myapplication.feature.settings.screen
 
 import androidx.compose.runtime.Immutable
 import com.example.myapplication.core.android.ui.presentation.theme.AppTheme

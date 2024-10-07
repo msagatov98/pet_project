@@ -11,8 +11,8 @@ import androidx.navigation.compose.composable
 import com.example.myapplication.core.android.ui.presentation.screen.Screen
 import com.example.myapplication.feature.pokemon.presentation.navigation.PokemonNavigator
 import com.example.myapplication.feature.pokemon.presentation.screen.list.PokemonListScreen
-import com.example.myapplication.feature.imagepicker.ImagePickerScreen
-import com.example.myapplication.feature.settings.SettingsScreen
+import com.example.myapplication.feature.imagepicker.screen.ImagePickerScreen
+import com.example.myapplication.feature.settings.screen.SettingsScreen
 
 object HomeScreen {
     const val HOME_SCREEN_COUNT = 3

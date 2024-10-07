@@ -43,8 +43,6 @@ class AppViewModel(
                 }
             }
         }
-
-
     }
 
     fun setBottomBarVisibility(isVisible: Boolean) {
