@@ -10,22 +10,23 @@ import com.example.myapplication.core.resource.map
 import com.example.myapplication.feature.pokemon.data.mapper.map
 import com.example.myapplication.feature.pokemon.data.mapper.mapPokemonDetailToStatList
 import com.example.myapplication.feature.pokemon.data.model.Pokemon
-import com.example.myapplication.feature.pokemon.data.source.PokemonDataSource
+import com.example.myapplication.feature.pokemon.data.source.local.PokemonDatabase
+import com.example.myapplication.feature.pokemon.data.source.remote.PokemonRemoteDataSource
 import com.example.myapplication.feature.pokemon.presentation.model.Stat
 import kotlinx.coroutines.flow.Flow
 
 class PokemonRepository(
     private val pokemonDatabase: PokemonDatabase,
-    private val pokemonDataSource: PokemonDataSource,
+    private val pokemonRemoteDataSource: PokemonRemoteDataSource,
 ) {
 
     suspend fun getData(page: Int): Resource<List<Pokemon>> {
-        return apiCall { pokemonDataSource.getData(page) }
+        return apiCall { pokemonRemoteDataSource.getData(page) }
             .map { data -> map(from = data, page = page) }
     }
 
     suspend fun getPokemon(name: String): Resource<List<Stat>> {
-        return apiCall { pokemonDataSource.getPokemonDetails(name) }
+        return apiCall { pokemonRemoteDataSource.getPokemonDetails(name) }
             .map(::mapPokemonDetailToStatList)
     }
 

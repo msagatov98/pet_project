@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.pokemon.data.source
+package com.example.myapplication.feature.pokemon.data.source.remote
 
 import com.example.myapplication.feature.pokemon.data.model.Data
 import com.example.myapplication.feature.pokemon.data.model.PokemonDetail
@@ -8,7 +8,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.http.path
 
-class PokemonDataSource(
+class PokemonRemoteDataSource(
     private val httpClient: HttpClient,
 ) {
 

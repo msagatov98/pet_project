@@ -3,8 +3,8 @@ package com.example.myapplication.feature.imagepicker.screen
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.core.ui.DefaultScreenController
-import com.example.myapplication.core.ui.ScreenController
+import com.example.myapplication.core.ui.controller.DefaultScreenController
+import com.example.myapplication.core.ui.controller.ScreenController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

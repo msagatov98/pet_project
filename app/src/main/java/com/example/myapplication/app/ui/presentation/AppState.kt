@@ -1,7 +1,7 @@
 package com.example.myapplication.app.ui.presentation
 
 import androidx.compose.runtime.Immutable
-import com.example.myapplication.core.ui.Screen
+import com.example.myapplication.core.ui.screen.Screen
 import com.example.myapplication.core.ui.theme.AppTheme
 import com.example.myapplication.core.ui.theme.ColorScheme
 

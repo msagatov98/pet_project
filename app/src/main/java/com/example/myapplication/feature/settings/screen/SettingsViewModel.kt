@@ -2,8 +2,8 @@ package com.example.myapplication.feature.settings.screen
 
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.app.ui.data.UiRepository
-import com.example.myapplication.core.ui.DefaultScreenController
-import com.example.myapplication.core.ui.ScreenController
+import com.example.myapplication.core.ui.controller.DefaultScreenController
+import com.example.myapplication.core.ui.controller.ScreenController
 
 class SettingsViewModel(
     private val uiRepository: UiRepository,

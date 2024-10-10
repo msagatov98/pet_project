@@ -31,7 +31,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.myapplication.core.ext.empty
-import com.example.myapplication.core.ui.Screen
+import com.example.myapplication.core.ui.screen.Screen
 import com.example.myapplication.core.ui.component.AppThemePreview
 import com.example.myapplication.core.ui.component.ScreenPreview
 import com.example.myapplication.core.ui.component.Spacer

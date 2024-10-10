@@ -22,7 +22,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.myapplication.core.ext.errorMessage
 import com.example.myapplication.core.resource.Resource
-import com.example.myapplication.core.ui.Screen
+import com.example.myapplication.core.ui.screen.Screen
 import com.example.myapplication.core.ui.component.AppThemePreview
 import com.example.myapplication.core.ui.component.ScreenPreview
 import com.example.myapplication.core.ui.component.Shimmer

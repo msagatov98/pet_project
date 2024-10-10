@@ -18,7 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.core.ext.empty
-import com.example.myapplication.core.ui.Screen
+import com.example.myapplication.core.ui.screen.Screen
 import com.example.myapplication.core.ui.component.BottomBar
 import com.example.myapplication.core.ui.component.EnableEdgeToEdgeEffect
 import com.example.myapplication.core.ui.theme.AppTheme

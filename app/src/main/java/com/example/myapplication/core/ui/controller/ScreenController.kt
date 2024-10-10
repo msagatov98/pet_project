@@ -1,4 +1,4 @@
-package com.example.myapplication.core.ui
+package com.example.myapplication.core.ui.controller
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel

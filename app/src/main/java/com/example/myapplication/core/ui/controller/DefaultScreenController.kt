@@ -1,4 +1,4 @@
-package com.example.myapplication.core.ui
+package com.example.myapplication.core.ui.controller
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -4,11 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.example.myapplication.core.ui.DefaultScreenController
-import com.example.myapplication.core.ui.ScreenController
+import com.example.myapplication.core.ui.controller.DefaultScreenController
+import com.example.myapplication.core.ui.controller.ScreenController
 import com.example.myapplication.feature.pokemon.data.repository.PokemonRepository
 import com.example.myapplication.feature.pokemon.presentation.model.Pokemon
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 
 class PokemonListViewModel(
     repository: PokemonRepository,

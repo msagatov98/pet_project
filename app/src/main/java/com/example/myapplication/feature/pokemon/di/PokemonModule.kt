@@ -1,9 +1,9 @@
 package com.example.myapplication.feature.pokemon.di
 
 import androidx.room.Room
-import com.example.myapplication.feature.pokemon.data.repository.PokemonDatabase
 import com.example.myapplication.feature.pokemon.data.repository.PokemonRepository
-import com.example.myapplication.feature.pokemon.data.source.PokemonDataSource
+import com.example.myapplication.feature.pokemon.data.source.local.PokemonDatabase
+import com.example.myapplication.feature.pokemon.data.source.remote.PokemonRemoteDataSource
 import com.example.myapplication.feature.pokemon.presentation.screen.detail.PokemonDetailViewModel
 import com.example.myapplication.feature.pokemon.presentation.screen.list.PokemonListViewModel
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +13,7 @@ import org.koin.dsl.module
 
 val pokemonModule = module {
     singleOf(::PokemonRepository)
-    singleOf(::PokemonDataSource)
+    singleOf(::PokemonRemoteDataSource)
     viewModelOf(::PokemonListViewModel)
     viewModelOf(::PokemonDetailViewModel)
     single<PokemonDatabase> {

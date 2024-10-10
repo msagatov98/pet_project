@@ -8,7 +8,7 @@ import androidx.room.withTransaction
 import com.example.myapplication.core.resource.Resource
 import com.example.myapplication.feature.pokemon.data.model.Pokemon
 import com.example.myapplication.feature.pokemon.data.model.RemoteKeys
-import java.util.UUID
+import com.example.myapplication.feature.pokemon.data.source.local.PokemonDatabase
 import java.util.concurrent.TimeUnit
 
 @OptIn(ExperimentalPagingApi::class)

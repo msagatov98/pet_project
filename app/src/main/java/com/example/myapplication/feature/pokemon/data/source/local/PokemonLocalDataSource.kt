@@ -1,4 +1,4 @@
-package com.example.myapplication.feature.pokemon.data.repository
+package com.example.myapplication.feature.pokemon.data.source.local
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
